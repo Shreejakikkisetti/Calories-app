@@ -8,8 +8,9 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: HomeViewController {
     
+    @IBOutlet weak var HistoryLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,5 +21,8 @@ class HistoryViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func NewDay(_ sender: UIButton){
+        HistoryLabel.text = "YASSS"
+    }
     
 }

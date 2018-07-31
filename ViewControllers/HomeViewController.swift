@@ -12,14 +12,24 @@ class HomeViewController: UIViewController {
     
     let defaults = UserDefaults.standard
     var totalCalories: Double = 2000
+    var cals: Double = 0
     var caloriesInTotal: Double = 0
+    var profile: Profile?
     
     @IBOutlet weak var calorieAmount: UILabel!
     @IBOutlet weak var totalCaloriesLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var foodItemTextField: UITextField!
     @IBOutlet weak var caloriesTextField: UITextField!
+    @IBOutlet weak var NewDay: UIButton!
     
+    func getButton() -> UIButton {
+        return NewDay
+    }
+    var text = ProfileViewController()
+    
+    
+
     var numDouble: Double = 0.0
     var foodItem: String = ""
     
@@ -32,11 +42,52 @@ class HomeViewController: UIViewController {
     var calories = [Double](){
         didSet{
             tableView.reloadData()
+            
         }
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        profile = CoreDataHelper.retrieveMyProfile()
+        guard let passedProfile = profile else {return}
+      
+        cals = passedProfile.cals
+        var sum: Double = 0
+        for i in calories{
+            sum += i
+        }
+        
+        totalCalories = passedProfile.cals - sum
+        if totalCalories < 0{
+            totalCaloriesLabel.text = "0"
+            let alert = UIAlertController(title: "Too many Calories", message: "Oops, it seems like you went over your calorie range, try better tomorrow", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                switch action.style{
+                case .default:
+                    print("default")
+                    
+                case .cancel:
+                    print("cancel")
+                    
+                case .destructive:
+                    print("destructive")
+                }}))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else{
+            totalCaloriesLabel.text = String(totalCalories)
+            
+        }
+    }
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+//        profile = CoreDataHelper.retrieveMyProfile()
+//        guard let passedProfile = profile else {return}
+//        totalCaloriesLabel.text = String(passedProfile.cals)
+//        cals = passedProfile.cals
+        
+        ///totalCalories = passedProfile.cals
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -86,7 +137,7 @@ class HomeViewController: UIViewController {
         
         if let num = caloriesTextField.text {
             if let numDbl = num.toDouble() {
-                if (foodItemTextField.text?.count)!>=1 && (caloriesTextField.text?.count)!>=1 {//ADDED
+                if (foodItemTextField.text?.count)!>=1 && (caloriesTextField.text?.count)!>=1 {
                 numDouble = numDbl
  
                 
@@ -112,7 +163,7 @@ class HomeViewController: UIViewController {
                         }}))
                     self.present(alert, animated: true, completion: nil)
                 }
-
+//
                 foods.append(foodItem)
                 calories.append(numDouble)
                 defaults.set(totalCaloriesLabel.text, forKey: "totalCaloriesLabel")
@@ -149,12 +200,19 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func NewDay(_ sender: UIButton) {
-        totalCaloriesLabel.text = "2000"
-        totalCalories = 2000
+        totalCaloriesLabel.text = String(cals)
+        //totalCaloriesLabel.text = String(cals)
+        totalCalories = Double(Int(cals))
         foods.removeAll()
         calories.removeAll()
         caloriesInTotal = 0
         calorieAmount.text = "0"
+        defaults.set(totalCaloriesLabel.text, forKey: "totalCaloriesLabel")
+        defaults.set(totalCalories, forKey: "totalCaloriesLabel")
+        defaults.set(foods, forKey: "FoodItemsArray")
+        defaults.set(calories, forKey: "CaloriesArray")
+        defaults.set(caloriesInTotal, forKey: "InTotal")
+        
     }
 }
 
@@ -165,6 +223,12 @@ extension String {
         let numberFormatter = NumberFormatter()
         numberFormatter.locale = Locale(identifier: "en_US_POSIX")
         return numberFormatter.number(from: self)?.doubleValue
+    }
+    func toInt() -> Int? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale(identifier: "en_US_POSIX")
+        return numberFormatter.number(from: self)?.intValue
+        
     }
     func isInt() -> Bool {
         
