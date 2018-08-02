@@ -38,7 +38,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.hideKeyboardWhenTappedAround()
          // Do any additional setup after loading the view, typically from a nib.
  
         //ASK HERE
@@ -175,6 +175,7 @@ class ProfileViewController: UIViewController {
             if let wDbl = w.toDouble(), a.isInt(), let hDbl = h.toDouble() {//CHANGE
                 if wDbl > 8 && hDbl > 10 && a.toInt()! > 0{
                 if (weightTextBox.text?.count)!>=1 && (ageTextBox.text?.count)!>=1  && (heightTextBox.text?.count)!>=1 {
+                    saveButtonAlert()
                     weight = wDbl
                     weightString = String(weight!)
                     age = Int(a)//CHANGE
@@ -224,6 +225,22 @@ class ProfileViewController: UIViewController {
         let allPr = CoreDataHelper.retreiveProfile()
 
 }
+    
+    func saveButtonAlert() {
+        let alert = UIAlertController(title: "Saved!", message: "Congratualations, you have saved all your information accurately, click ok and navigate to the home button on the botton to continue!", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+            }}))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     func inaccurateInfo() {
         let alert = UIAlertController(title: "Inacurrate Information", message: "Oops, it seems like you did not enter accurate number values for some of your questions, go back and make sure you answered the questions properly", preferredStyle: UIAlertControllerStyle.alert)
@@ -380,5 +397,16 @@ class ProfileViewController: UIViewController {
             return p
         }
         return 100
+    }
+}
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

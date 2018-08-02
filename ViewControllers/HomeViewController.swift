@@ -88,6 +88,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -330,5 +331,6 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     
 }
+
 
 
