@@ -173,6 +173,7 @@ class ProfileViewController: UIViewController {
         
         if let w = weightTextBox.text, let a = ageTextBox.text, let h = heightTextBox.text {
             if let wDbl = w.toDouble(), a.isInt(), let hDbl = h.toDouble() {//CHANGE
+                if wDbl > 8 && hDbl > 10 && a.toInt()! > 0{
                 if (weightTextBox.text?.count)!>=1 && (ageTextBox.text?.count)!>=1  && (heightTextBox.text?.count)!>=1 {
                     weight = wDbl
                     weightString = String(weight!)
@@ -204,23 +205,14 @@ class ProfileViewController: UIViewController {
                     print("\(profile.cals) : -----" )
                     
                 }
-                
+                }
+                else {
+                  inaccurateInfo()
+                }
             }
                 
             else {
-                let alert = UIAlertController(title: "Inacurrate Information", message: "Oops, it seems like you did not enter number values for some of your questions, go back and make sure you answered the questions properly", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                    switch action.style{
-                    case .default:
-                        print("default")
-                        
-                    case .cancel:
-                        print("cancel")
-                        
-                    case .destructive:
-                        print("destructive")
-                    }}))
-                self.present(alert, animated: true, completion: nil)
+                inaccurateInfo()
             }
             
             
@@ -233,7 +225,21 @@ class ProfileViewController: UIViewController {
 
 }
     
-
+    func inaccurateInfo() {
+        let alert = UIAlertController(title: "Inacurrate Information", message: "Oops, it seems like you did not enter accurate number values for some of your questions, go back and make sure you answered the questions properly", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+            }}))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     @IBAction func littleButtonPressed(_ sender: Any) {
         little.backgroundColor = UIColor.red

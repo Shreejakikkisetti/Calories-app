@@ -139,8 +139,9 @@ class HomeViewController: UIViewController {
             if let num = caloriesTextField.text {
                 
                 //checks if num text is a number
-                if let numDbl = num.toDouble() {
-                    
+                
+                if let numDbl = num.toDouble(){
+                    if numDbl > 0.0 && numDbl < 5000{
                     numDouble = numDbl
                     
                     //update the total calories and update the total calories label
@@ -151,7 +152,7 @@ class HomeViewController: UIViewController {
                     //check if the new entry is not putting the total calories over the daily limit
                     if(totalCalories>=0) {
                         totalCaloriesLabel.text = String(totalCalories)
-                    } else {
+                    }else {
                         
                         //set calories label to zero and display message
                         totalCaloriesLabel.text = "0"
@@ -183,22 +184,12 @@ class HomeViewController: UIViewController {
                     //reset the text fields
                     foodItemTextField.text = ""
                     caloriesTextField.text = ""
+                    }
+                    else {
+                        incorrectCalories()
+                    }
                 } else {
-                    
-                    //invalid calories text
-                    let alert = UIAlertController(title: "Incorrect calorie amount", message: "Oops, it seems like you did not put in a number for calories", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                        switch action.style{
-                        case .default:
-                            print("default")
-                            
-                        case .cancel:
-                            print("cancel")
-                            
-                        case .destructive:
-                            print("destructive")
-                        }}))
-                    self.present(alert, animated: true, completion: nil)
+                    incorrectCalories()
                 }
                 print(foods)
                 print(calories)
@@ -208,6 +199,21 @@ class HomeViewController: UIViewController {
         
     }
     
+    func incorrectCalories() {
+        let alert = UIAlertController(title: "Incorrect calorie amount", message: "Oops, it seems like you did not put in a valid number for calories", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+            }}))
+        self.present(alert, animated: true, completion: nil)
+    }
     @IBAction func NewDay(_ sender: UIButton) {
         totalCaloriesLabel.text = String(cals)
         history = CoreDataHelperHistory.retrieveMyHistory()
