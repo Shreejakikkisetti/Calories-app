@@ -109,7 +109,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="108.5" height="30"/>
                                         <state key="normal" title="New Day"/>
                                         <connections>
-                                            <action selector="NewDay:" destination="BAJ-dM-cdx" eventType="touchUpInside" id="vZj-RA-UQh"/>
+                                            <action selector="NewDay:" destination="BAJ-dM-cdx" eventType="touchUpInside" id="BKt-Zg-pAf"/>
                                             <action selector="NewDayPressed:" destination="Mod-9P-DhB" eventType="touchUpInside" id="1xM-vZ-ty2"/>
                                         </connections>
                                     </button>
@@ -203,7 +203,7 @@
                                 <rect key="frame" x="25" y="103.5" width="325" height="489.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="lba-g1-DrN">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryCell" id="lba-g1-DrN" customClass="HistoryTableViewCell" customModule="Calories_app" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="325" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lba-g1-DrN" id="Jy1-CM-FPf">
@@ -211,8 +211,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2y-Bh-iJr">
-                                                    <rect key="frame" x="33" y="12" width="41" height="21"/>
+                                                    <rect key="frame" x="33" y="12" width="117" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="date"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -220,12 +221,18 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Calories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa9-k1-KyX">
                                                     <rect key="frame" x="231" y="12" width="63" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="calories"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="HistoryCell"/>
+                                        <connections>
+                                            <outlet property="calories" destination="Oa9-k1-KyX" id="SLv-5Q-Ldn"/>
+                                            <outlet property="date" destination="c2y-Bh-iJr" id="Osv-x0-ISG"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -247,11 +254,12 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="HistoryLabel" destination="T5q-9n-LcX" id="IIX-vG-3vt"/>
+                        <outlet property="tableView" destination="28F-8z-llP" id="woU-2V-uVR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LOq-KR-0Eh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="391" y="905"/>
+            <point key="canvasLocation" x="389.60000000000002" y="904.49775112443785"/>
         </scene>
         <!--Profile-->
         <scene sceneID="yab-el-Y3l">

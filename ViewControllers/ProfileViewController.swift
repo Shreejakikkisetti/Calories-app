@@ -67,9 +67,9 @@ class ProfileViewController: UIViewController {
         if profile.activityRate == "veryHeavy"{
             veryHeavyAction()
         }
-        if !((profile.activityRate?.isEmpty)!){
-            check = true
-        }
+//        if !((profile.activityRate?.isEmpty)!){
+//            check = true
+//       }
         
     }
 
@@ -109,6 +109,12 @@ class ProfileViewController: UIViewController {
         profile.activityRate = ""
         profile.gender = "Male"
         profile.cals = 0
+        weightTextBox.text = ""
+        ageTextBox.text = ""
+        heightTextBox.text = ""
+        genderCheck = "Male"
+        little.backgroundColor = UIColor.white
+        
     }
     
     
@@ -143,7 +149,7 @@ class ProfileViewController: UIViewController {
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         print("SAVE BUTTON PRESSED")
         let allP = CoreDataHelper.retreiveProfile()
-
+        
         
         if((weightTextBox.text?.count)! > 0 && (ageTextBox.text?.count)! > 0 && (heightTextBox.text?.count)! > 0 && check == true) {
         }
@@ -162,7 +168,7 @@ class ProfileViewController: UIViewController {
                     print("destructive")
                 }}))
             self.present(alert, animated: true, completion: nil)
-        
+            
         }
         
         if let w = weightTextBox.text, let a = ageTextBox.text, let h = heightTextBox.text {
@@ -189,7 +195,7 @@ class ProfileViewController: UIViewController {
                         var agetemp = 6.8 * Double(age!)
                         BMR = 66 + (weighttemp) + (heighttemp) - (agetemp)
                     }
-
+                    
                     ProfileViewController.MyCaloriesAmount = BMR * activityValue
                     print(ProfileViewController.MyCaloriesAmount)
                     print("hello")
@@ -202,29 +208,29 @@ class ProfileViewController: UIViewController {
             }
                 
             else {
-                        let alert = UIAlertController(title: "Inacurrate Information", message: "Oops, it seems like you did not enter number values for some of your questions, go back and make sure you answered the questions properly", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                            switch action.style{
-                            case .default:
-                                print("default")
-                                
-                            case .cancel:
-                                print("cancel")
-                                
-                            case .destructive:
-                                print("destructive")
-                            }}))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-    
-    
+                let alert = UIAlertController(title: "Inacurrate Information", message: "Oops, it seems like you did not enter number values for some of your questions, go back and make sure you answered the questions properly", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    switch action.style{
+                    case .default:
+                        print("default")
+                        
+                    case .cancel:
+                        print("cancel")
+                        
+                    case .destructive:
+                        print("destructive")
+                    }}))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+            
         }
         if profile?.id == nil{
-        profile?.id = UUID().uuidString
+            profile?.id = UUID().uuidString
         }
         CoreDataHelper.saveProfile(profile: profile!)
         let allPr = CoreDataHelper.retreiveProfile()
-        
+
 }
     
 
