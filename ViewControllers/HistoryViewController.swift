@@ -62,7 +62,14 @@ class HistoryViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func cleearButtonPressed(_ sender: UIButton) {
+        dates.removeAll()
+        calories.removeAll()
+        CoreDataHelperHistory.deleteAll(history: historyItems)
+        tableView.reloadData()
+        
+    }
+    
     
 }
 extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
@@ -74,7 +81,7 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
         let date = dates[indexPath.row]
         let calorie = calories[indexPath.row]
         cell.calories.text = String(calorie)
-        cell.date.text = date.toString(dateFormat: "dd-MM")
+        cell.date.text = date.toString(dateFormat: "MM-dd-yyyy")
         return cell
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath){

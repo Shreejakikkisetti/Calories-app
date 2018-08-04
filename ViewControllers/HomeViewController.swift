@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
     var profile: Profile?
     var history : History!
     var historyArray = [History]()
+    var warningcount = 0
     
     @IBOutlet weak var calorieAmount: UILabel!
     @IBOutlet weak var totalCaloriesLabel: UILabel!
@@ -104,6 +105,9 @@ class HomeViewController: UIViewController {
         if let c = defaults.double(forKey: "InTotal") as? Double {
             caloriesInTotal = c
         }
+        if let c = defaults.integer(forKey: "warningcount") as? Int {
+            warningcount = c
+        }
         if(totalCalories>=0){
             totalCaloriesLabel.text = String(totalCalories)
         }
@@ -111,6 +115,7 @@ class HomeViewController: UIViewController {
             totalCaloriesLabel.text = "0"
         }
         calorieAmount.text = String(caloriesInTotal)
+        UserDefaults.standard.set(warningcount, forKey: "warningcount")
     }
     
     @IBAction func addButton(_ sender: UIButton) {
@@ -154,22 +159,13 @@ class HomeViewController: UIViewController {
                     if(totalCalories>=0) {
                         totalCaloriesLabel.text = String(totalCalories)
                     }else {
-                        
+                        if warningcount == 0{
                         //set calories label to zero and display message
-                        totalCaloriesLabel.text = "0"
-                        let alert = UIAlertController(title: "Too many Calories", message: "Oops, it seems like you went over your calorie range, try better tomorrow", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                            switch action.style{
-                            case .default:
-                                print("default")
-                                
-                            case .cancel:
-                                print("cancel")
-                                
-                            case .destructive:
-                                print("destructive")
-                            }}))
-                        self.present(alert, animated: true, completion: nil)
+                            wentOver()
+                        }
+                        else{
+
+                        }
                     }
                     
                     //regardless of too many calories or not, record the new entry
@@ -180,6 +176,8 @@ class HomeViewController: UIViewController {
                     defaults.set(foods, forKey: "FoodItemsArray")
                     defaults.set(calories, forKey: "CaloriesArray")
                     defaults.set(caloriesInTotal, forKey: "InTotal")
+                    defaults.set(warningcount, forKey: "warningcount")
+                    print("warning count \(warningcount)")
                     tableView.reloadData()
                     
                     //reset the text fields
@@ -197,7 +195,22 @@ class HomeViewController: UIViewController {
                 
             }
         }
-        
+        }
+    func wentOver () {
+        totalCaloriesLabel.text = "0"
+        let alert = UIAlertController(title: "Too many Calories", message: "Oops, it seems like you went over your calorie range, try better tomorrow", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+            }}))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func incorrectCalories() {
@@ -237,7 +250,7 @@ class HomeViewController: UIViewController {
         // deleting the entry altogether if it has nil values
         // or just prevent peopl
  
-        
+        warningcount = 0
     }
     
 }
@@ -315,7 +328,12 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             
             totalCalories = totalCalories + calories[indexPath.row]
+            if totalCalories > 0{
             totalCaloriesLabel.text = String(totalCalories)
+            }
+            else{
+                totalCaloriesLabel.text = "0"
+            }
             caloriesInTotal = caloriesInTotal - calories[indexPath.row]
             calorieAmount.text = String(caloriesInTotal)
             calories.remove(at: indexPath.row)

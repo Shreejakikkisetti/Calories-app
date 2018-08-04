@@ -68,5 +68,12 @@ struct CoreDataHelperHistory{
         
         saveHistory(history: history)
     }
+    static func deleteAll(history: [History]){
+        for i in history {
+            context.delete(i)
+            saveHistory(history: i)
+        }
+
+    }
     
 }

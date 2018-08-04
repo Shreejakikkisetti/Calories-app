@@ -9,6 +9,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    var window: UIWindow?
     let defaults = UserDefaults.standard
     var genderVal = 0.0
     @IBOutlet weak var gender: UISegmentedControl!
@@ -35,6 +36,7 @@ class ProfileViewController: UIViewController {
     var weightString = ""
     var profile : Profile!
     
+    @IBOutlet weak var caloriesLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +45,25 @@ class ProfileViewController: UIViewController {
  
         //ASK HERE
         self.profile = CoreDataHelper.retrieveMyProfile()
-        ageTextBox.text = String(profile.age)
-        weightTextBox.text = String(profile.weight)
-        heightTextBox.text = String(profile.height)
+        if profile.age > 0{
+            ageTextBox.text = String(profile.age)
+        }
+        else {
+            ageTextBox.text = ""
+        }
+        if profile.weight > 0{
+            weightTextBox.text = String(profile.weight)
+        }
+        else {
+            weightTextBox.text = ""
+        }
+        if profile.height > 0{
+            heightTextBox.text = String(profile.height)
+        }
+        else{
+            heightTextBox.text = ""
+        }
+        caloriesLabel.text = String(profile.cals)
         if profile.gender == "Male"{
             gender.selectedSegmentIndex = 0
         }
@@ -67,9 +85,9 @@ class ProfileViewController: UIViewController {
         if profile.activityRate == "veryHeavy"{
             veryHeavyAction()
         }
-//        if !((profile.activityRate?.isEmpty)!){
+//        if ((profile.activityRate?.isEmpty)! == false){
 //            check = true
-//       }
+//      }
         
     }
 
@@ -81,6 +99,20 @@ class ProfileViewController: UIViewController {
     var heavyBool = false
     var veryHeavyBool = false
     
+    @IBAction func helpButtonPressed(_ sender: UIButton) {
+        print("Help button was pressed!")
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "PageViewController")
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
+        //        let pg: PageViewController = PageViewController()
+        //        pg.viewDidLoad()
+        //        pg.configurePageControl()
+        
+        let pg: ViewController = ViewController()
+        pg.viewDidLoad()
+    }
     
     @IBAction func resetButtonPressed(_ sender: UIButton) {
         weight = 0
@@ -114,7 +146,7 @@ class ProfileViewController: UIViewController {
         heightTextBox.text = ""
         genderCheck = "Male"
         little.backgroundColor = UIColor.white
-        
+        caloriesLabel.text = ""
     }
     
     
@@ -204,7 +236,7 @@ class ProfileViewController: UIViewController {
                     profile.cals = ProfileViewController.MyCaloriesAmount
                     CoreDataHelper.saveProfile(profile: profile)
                     print("\(profile.cals) : -----" )
-                    
+                    caloriesLabel.text = String(profile.cals)
                 }
                 }
                 else {
@@ -398,7 +430,27 @@ class ProfileViewController: UIViewController {
         }
         return 100
     }
+    
+    
+    /*
+     @IBAction func button_clicked(_ sender: UIButton) {
+     self.performSegue(withIdentifier: "segueToNext", sender: self)
+     }
+     
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     if segue.identifier == "segueToNext" {
+     if let destination = segue.destination as? Modo1ViewController {
+     destination.nomb = nombres // you can pass value to destination view controller
+     
+     // destination.nomb = arrayNombers[(sender as! UIButton).tag] // Using button Tag
+     }
+     }
+     }
+ */
+
+    
 }
+
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
