@@ -25,16 +25,19 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var weightTextBox: UITextField!
     @IBOutlet weak var ageTextBox: UITextField!
     @IBOutlet weak var heightTextBox: UITextField!
-    var weight: Double?
+    var weight: Int?
     var age: Int?
-    var height: Double?
+    var height: Int?
     var saveCheck = false
-    static var MyCaloriesAmount: Double = 0
+    static var MyCaloriesAmount: Int = 0
     
     var activityValue = 0.0
     var segmentedControlIndex: Int?
     var weightString = ""
     var profile : Profile!
+    let white = UIColor(rgb: 0xF9F8F0)  // BE5300 is the hex value
+    let darkPink = UIColor(rgb: 0x8884FF)
+
     
     @IBOutlet weak var caloriesLabel: UILabel!
     
@@ -85,9 +88,9 @@ class ProfileViewController: UIViewController {
         if profile.activityRate == "veryHeavy"{
             veryHeavyAction()
         }
-//        if ((profile.activityRate?.isEmpty)! == false){
-//            check = true
-//      }
+        if ((profile.activityRate?.isEmpty) == false){
+            check = true
+        }
         
     }
 
@@ -130,11 +133,17 @@ class ProfileViewController: UIViewController {
         weightTextBox.text = ""
         ageTextBox.text = ""
         heightTextBox.text = ""
-        light.backgroundColor = UIColor.white
-        little.backgroundColor = UIColor.white
-        moderate.backgroundColor = UIColor.white
-        heavy.backgroundColor = UIColor.white
-        veryHeavy.backgroundColor = UIColor.white
+        light.backgroundColor = white
+        little.backgroundColor = white
+        moderate.backgroundColor = white
+        heavy.backgroundColor = white
+        veryHeavy.backgroundColor = white
+        little.setTitleColor(darkPink, for: .normal)
+        light.setTitleColor(darkPink, for: .normal)
+        moderate.setTitleColor(darkPink, for: .normal)
+        heavy.setTitleColor(darkPink, for: .normal)
+        veryHeavy.setTitleColor(darkPink, for: .normal)
+
         profile.weight = 0
         profile.height = 0
         profile.age = 0
@@ -145,7 +154,6 @@ class ProfileViewController: UIViewController {
         ageTextBox.text = ""
         heightTextBox.text = ""
         genderCheck = "Male"
-        little.backgroundColor = UIColor.white
         caloriesLabel.text = ""
     }
     
@@ -204,36 +212,51 @@ class ProfileViewController: UIViewController {
         }
         
         if let w = weightTextBox.text, let a = ageTextBox.text, let h = heightTextBox.text {
-            if let wDbl = w.toDouble(), a.isInt(), let hDbl = h.toDouble() {//CHANGE
-                if wDbl > 8 && hDbl > 10 && a.toInt()! > 0{
+            /*
+             let dbl = 2.4
+             let isInteger = floor(dbl) == dbl
+             
+             }
+            */
+            if let wDbl = w.toDouble(), let aDbl = a.toDouble(), let hDbl = h.toDouble() {
+                
+                let wdbl = wDbl
+                let isWeightInteger = floor(wdbl) == wdbl
+                
+                let adbl = aDbl
+                let isAgeInteger = floor(adbl) == adbl
+                
+                let hdbl = hDbl
+                let isHeightInteger = floor(hdbl) == hdbl
+                if wDbl > 8 && hDbl > 8 && a.toInt()! > 0 && isWeightInteger && isAgeInteger && isHeightInteger && wDbl < 2000 && a.toInt()! < 300 && hDbl < 200 {
                 if (weightTextBox.text?.count)!>=1 && (ageTextBox.text?.count)!>=1  && (heightTextBox.text?.count)!>=1 {
                     saveButtonAlert()
-                    weight = wDbl
+                    weight = Int(wDbl)
                     weightString = String(weight!)
                     age = Int(a)//CHANGE
-                    height = hDbl
+                    height = Int(hDbl)
                     var BMR = 0.0
-                    profile?.weight = weight!
-                    profile?.height = height!
+                    profile?.weight = Int32(weight!)
+                    profile?.height = Int32(height!)
                     profile?.age = Int16(age!)
                     if genderCheck == "Female"{
-                        var weighttemp  = 4.35 * weight!
-                        var heighttemp = 4.7 * height!
+                        var weighttemp  = 4.35 * Double(weight!)
+                        var heighttemp = 4.7 * Double(height!)
                         var agetemp = 4.7 * Double(age!)
                         BMR = 655 + weighttemp + heighttemp - agetemp
                     }
                         
                     else {
-                        var weighttemp  = 6.23 * weight!
-                        var heighttemp = 12.7 * height!
+                        var weighttemp  = 6.23 * Double(weight!)
+                        var heighttemp = 12.7 * Double(height!)
                         var agetemp = 6.8 * Double(age!)
                         BMR = 66 + (weighttemp) + (heighttemp) - (agetemp)
                     }
                     
-                    ProfileViewController.MyCaloriesAmount = BMR * activityValue
+                    ProfileViewController.MyCaloriesAmount = Int(BMR * activityValue)
                     print(ProfileViewController.MyCaloriesAmount)
                     print("hello")
-                    profile.cals = ProfileViewController.MyCaloriesAmount
+                    profile.cals = Int32(ProfileViewController.MyCaloriesAmount)
                     CoreDataHelper.saveProfile(profile: profile)
                     print("\(profile.cals) : -----" )
                     caloriesLabel.text = String(profile.cals)
@@ -275,7 +298,7 @@ class ProfileViewController: UIViewController {
     }
     
     func inaccurateInfo() {
-        let alert = UIAlertController(title: "Inacurrate Information", message: "Oops, it seems like you did not enter accurate number values for some of your questions, go back and make sure you answered the questions properly", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Inacurrate Information", message: "Make sure all your numbers are positive integers", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             switch action.style{
             case .default:
@@ -291,7 +314,6 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func littleButtonPressed(_ sender: Any) {
-        little.backgroundColor = UIColor.red
        // if little.backgroundColor == UIColor.red && little.isTouchInside {
          //  little.backgroundColor = UIColor.white
       //  }
@@ -301,9 +323,7 @@ class ProfileViewController: UIViewController {
     
 
     @IBAction func questionAsked(_ sender: UIButton) {
-        activityButtons.forEach { (button) in
-            button.isHidden =  !button.isHidden
-        }
+
     }
     enum activities: String {
         case little = "little to none"
@@ -320,11 +340,18 @@ class ProfileViewController: UIViewController {
         veryHeavyBool = false
         profile?.activityRate = "little"
         if littleBool == true{
-            little.backgroundColor = UIColor.red
-            light.backgroundColor = UIColor.white
-            moderate.backgroundColor = UIColor.white
-            heavy.backgroundColor = UIColor.white
-            veryHeavy.backgroundColor = UIColor.white
+            little.backgroundColor = darkPink
+            light.backgroundColor = white
+            moderate.backgroundColor = white
+            heavy.backgroundColor = white
+            veryHeavy.backgroundColor = white
+            
+            little.setTitleColor(white, for: .normal)
+            light.setTitleColor(darkPink, for: .normal)
+            moderate.setTitleColor(darkPink, for: .normal)
+            heavy.setTitleColor(darkPink, for: .normal)
+            veryHeavy.setTitleColor(darkPink, for: .normal)
+            
             
         }
         activityValue = 1.2
@@ -337,11 +364,17 @@ class ProfileViewController: UIViewController {
         veryHeavyBool = false
         profile?.activityRate = "light"
         if lightBool == true{
-            little.backgroundColor = UIColor.white
-            light.backgroundColor = UIColor.red
-            moderate.backgroundColor = UIColor.white
-            heavy.backgroundColor = UIColor.white
-            veryHeavy.backgroundColor = UIColor.white
+            little.backgroundColor = white
+            light.backgroundColor = darkPink
+            moderate.backgroundColor = white
+            heavy.backgroundColor = white
+            veryHeavy.backgroundColor = white
+            
+            little.setTitleColor(darkPink, for: .normal)
+            light.setTitleColor(white, for: .normal)
+            moderate.setTitleColor(darkPink, for: .normal)
+            heavy.setTitleColor(darkPink, for: .normal)
+            veryHeavy.setTitleColor(darkPink, for: .normal)
         }
         activityValue = 1.375
     }
@@ -353,11 +386,17 @@ class ProfileViewController: UIViewController {
         veryHeavyBool = false
         profile?.activityRate = "moderate"
         if moderateBool == true{
-            little.backgroundColor = UIColor.white
-            light.backgroundColor = UIColor.white
-            moderate.backgroundColor = UIColor.red
-            heavy.backgroundColor = UIColor.white
-            veryHeavy.backgroundColor = UIColor.white
+            little.backgroundColor = white
+            light.backgroundColor = white
+            moderate.backgroundColor = darkPink
+            heavy.backgroundColor = white
+            veryHeavy.backgroundColor = white
+            
+            little.setTitleColor(darkPink, for: .normal)
+            light.setTitleColor(darkPink, for: .normal)
+            moderate.setTitleColor(white, for: .normal)
+            heavy.setTitleColor(darkPink, for: .normal)
+            veryHeavy.setTitleColor(darkPink, for: .normal)
         }
         activityValue = 1.55
     }
@@ -370,11 +409,17 @@ class ProfileViewController: UIViewController {
         veryHeavyBool = false
         profile?.activityRate = "heavy"
         if heavyBool == true{
-            little.backgroundColor = UIColor.white
-            light.backgroundColor = UIColor.white
-            moderate.backgroundColor = UIColor.white
-            heavy.backgroundColor = UIColor.red
-            veryHeavy.backgroundColor = UIColor.white
+            little.backgroundColor = white
+            light.backgroundColor = white
+            moderate.backgroundColor = white
+            heavy.backgroundColor = darkPink
+            veryHeavy.backgroundColor = white
+            
+            little.setTitleColor(darkPink, for: .normal)
+            light.setTitleColor(darkPink, for: .normal)
+            moderate.setTitleColor(darkPink, for: .normal)
+            heavy.setTitleColor(white, for: .normal)
+            veryHeavy.setTitleColor(darkPink, for: .normal)
         }
         activityValue = 1.725
     }
@@ -387,11 +432,17 @@ class ProfileViewController: UIViewController {
         veryHeavyBool = true
         profile?.activityRate = "veryHeavy"
         if veryHeavyBool == true{
-            little.backgroundColor = UIColor.white
-            light.backgroundColor = UIColor.white
-            moderate.backgroundColor = UIColor.white
-            heavy.backgroundColor = UIColor.white
-            veryHeavy.backgroundColor = UIColor.red
+            little.backgroundColor = white
+            light.backgroundColor = white
+            moderate.backgroundColor = white
+            heavy.backgroundColor = white
+            veryHeavy.backgroundColor = darkPink
+            
+            little.setTitleColor(darkPink, for: .normal)
+            light.setTitleColor(darkPink, for: .normal)
+            moderate.setTitleColor(darkPink, for: .normal)
+            heavy.setTitleColor(darkPink, for: .normal)
+            veryHeavy.setTitleColor(white, for: .normal)
         }
         activityValue = 1.9
         
@@ -421,32 +472,18 @@ class ProfileViewController: UIViewController {
     }
     }
 
-    func getCals() -> Double{
+    func getCals() -> Int{
         print(profile?.cals)
          print(ProfileViewController.MyCaloriesAmount)
         print("my logic works")
         if let p = profile?.cals {
-            return p
+            return Int(p)
         }
         return 100
     }
     
     
-    /*
-     @IBAction func button_clicked(_ sender: UIButton) {
-     self.performSegue(withIdentifier: "segueToNext", sender: self)
-     }
-     
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     if segue.identifier == "segueToNext" {
-     if let destination = segue.destination as? Modo1ViewController {
-     destination.nomb = nombres // you can pass value to destination view controller
-     
-     // destination.nomb = arrayNombers[(sender as! UIButton).tag] // Using button Tag
-     }
-     }
-     }
- */
+
 
     
 }
@@ -460,5 +497,20 @@ extension UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+extension UIColor {
+    
+    convenience init(rgb: UInt) {
+        self.init(rgb: rgb, alpha: 1.0)
+    }
+    
+    convenience init(rgb: UInt, alpha: CGFloat) {
+        self.init(
+            red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgb & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgb & 0x0000FF) / 255.0,
+            alpha: CGFloat(alpha)
+        )
     }
 }

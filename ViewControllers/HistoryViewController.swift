@@ -19,7 +19,7 @@ class HistoryViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    var calories = [Double]() {
+    var calories = [Int]() {
         didSet {
             tableView.reloadData()
         }
@@ -47,7 +47,7 @@ class HistoryViewController: UIViewController {
         for i in historyItems{
             
             dates.append(i.date!)
-            calories.append(Double(i.calories))
+            calories.append(Int(i.calories))
         }
         
         print(historyItems)
@@ -83,6 +83,7 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
         cell.calories.text = String(calorie)
         cell.date.text = date.toString(dateFormat: "MM-dd-yyyy")
         return cell
+
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath){
         if editingStyle == .delete {

@@ -27,13 +27,14 @@ struct CoreDataHelperHistory{
         do{
             let fetchRequest = NSFetchRequest<History>(entityName: "History")
             let results = try CoreDataHelper.context.fetch(fetchRequest)
-            return results
+            return results.sorted(by: {$0.date! > $01.date!})
         }catch let error{
             print("Could not fetch \(error.localizedDescription)")
             return[]
         }
         
     }
+
     static func saveHistory(history: History) {
 
         do {

@@ -11,13 +11,13 @@ import UIKit
 class HomeViewController: UIViewController {
     
     let defaults = UserDefaults.standard
-    var totalCalories: Double = 2000
-    var cals: Double = 0
-    var caloriesInTotal: Double = 0
+    var totalCalories: Int = 0
+    var cals: Int = 0
+    var caloriesInTotal: Int = 0
     var profile: Profile?
     var history : History!
     var historyArray = [History]()
-    var warningcount = 0
+    var warningcount = false
     
     @IBOutlet weak var calorieAmount: UILabel!
     @IBOutlet weak var totalCaloriesLabel: UILabel!
@@ -33,7 +33,7 @@ class HomeViewController: UIViewController {
     
     
     
-    var numDouble: Double = 0.0
+    var numInt: Int = 0
     var foodItem: String = ""
     
     
@@ -42,7 +42,7 @@ class HomeViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    var calories = [Double](){
+    var calories = [Int](){
         didSet{
             tableView.reloadData()
             
@@ -55,31 +55,16 @@ class HomeViewController: UIViewController {
 
         guard let passedProfile = profile else {return}
         
-        cals = passedProfile.cals
-        var sum: Double = 0
+        cals = Int(passedProfile.cals)
+        var sum: Int = 0
         for i in calories{
             sum += i
         }
         
-        totalCalories = passedProfile.cals - sum
-        if totalCalories < 0{
-            //            if alreadyPresentedTooManyCaloriesMessageForToday == false {
+        totalCalories = Int(passedProfile.cals) - sum
+        if totalCalories <= 0{
+
             totalCaloriesLabel.text = "0"
-            let alert = UIAlertController(title: "Too many Calories", message: "Oops, it seems like you went over your calorie range, try better tomorrow", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                switch action.style{
-                case .default:
-                    print("default")
-                    
-                case .cancel:
-                    print("cancel")
-                    
-                case .destructive:
-                    print("destructive")
-                }}))
-            self.present(alert, animated: true, completion: nil)
-            //                alreadyPresentedTooManyCaloriesMessageForToday = true
-            //            }
         }
         else{
             totalCaloriesLabel.text = String(totalCalories)
@@ -96,18 +81,19 @@ class HomeViewController: UIViewController {
         if let food = defaults.array(forKey: "FoodItemsArray") as? [String] {
             foods = food
         }
-        if let calorie = defaults.array(forKey: "CaloriesArray") as? [Double] {
+        if let calorie = defaults.array(forKey: "CaloriesArray") as? [Int] {
             calories = calorie
         }
-        if let c = defaults.double(forKey: "totalCaloriesLabel") as? Double {
+        if let c = defaults.integer(forKey: "totalCaloriesLabel") as? Int {
             totalCalories = c
         }
-        if let c = defaults.double(forKey: "InTotal") as? Double {
+        if let c = defaults.integer(forKey: "InTotal") as? Int {
             caloriesInTotal = c
         }
-        if let c = defaults.integer(forKey: "warningcount") as? Int {
+        if let c = defaults.bool(forKey: "warningcount") as? Bool {
             warningcount = c
         }
+            
         if(totalCalories>=0){
             totalCaloriesLabel.text = String(totalCalories)
         }
@@ -115,7 +101,7 @@ class HomeViewController: UIViewController {
             totalCaloriesLabel.text = "0"
         }
         calorieAmount.text = String(caloriesInTotal)
-        UserDefaults.standard.set(warningcount, forKey: "warningcount")
+
     }
     
     @IBAction func addButton(_ sender: UIButton) {
@@ -147,20 +133,24 @@ class HomeViewController: UIViewController {
                 //checks if num text is a number
                 
                 if let numDbl = num.toDouble(){
-                    if numDbl > 0.0 && numDbl < 5000{
-                    numDouble = numDbl
-                    
+                    let dbl = numDbl
+                    let isInteger = floor(dbl) == dbl
+                    if numDbl >= 0 && numDbl < 10000 && isInteger {
+                    numInt = Int(numDbl)
+
                     //update the total calories and update the total calories label
-                    totalCalories = totalCalories - numDouble
-                    caloriesInTotal = caloriesInTotal + numDouble
+                    //HELP HERE
+                    totalCalories = totalCalories - numInt
+                        print("totalCalories\(totalCalories)")
+                    caloriesInTotal = caloriesInTotal + numInt
                     calorieAmount.text = String(caloriesInTotal)
                     
                     //check if the new entry is not putting the total calories over the daily limit
-                    if(totalCalories>=0) {
+                    if(totalCalories >= 0) {
                         totalCaloriesLabel.text = String(totalCalories)
                     }else {
-                        if warningcount == 0{
-                        //set calories label to zero and display message
+                        totalCaloriesLabel.text = "0"
+                        if warningcount == false || totalCalories <= 0{
                             wentOver()
                         }
                         else{
@@ -170,7 +160,7 @@ class HomeViewController: UIViewController {
                     
                     //regardless of too many calories or not, record the new entry
                     foods.append(foodItem)
-                    calories.append(numDouble)
+                    calories.append(numInt)
                     defaults.set(totalCaloriesLabel.text, forKey: "totalCaloriesLabel")
                     defaults.set(totalCalories, forKey: "totalCaloriesLabel")
                     defaults.set(foods, forKey: "FoodItemsArray")
@@ -198,6 +188,7 @@ class HomeViewController: UIViewController {
         }
     func wentOver () {
         totalCaloriesLabel.text = "0"
+        if warningcount == false {
         let alert = UIAlertController(title: "Too many Calories", message: "Oops, it seems like you went over your calorie range, try better tomorrow", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             switch action.style{
@@ -211,10 +202,13 @@ class HomeViewController: UIViewController {
                 print("destructive")
             }}))
         self.present(alert, animated: true, completion: nil)
+        defaults.set(warningcount, forKey: "warningcount")
+        }
+        defaults.set(warningcount, forKey: "warningcount")
     }
     
     func incorrectCalories() {
-        let alert = UIAlertController(title: "Incorrect calorie amount", message: "Oops, it seems like you did not put in a valid number for calories", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Incorrect calorie amount", message: "Make sure you put an integer whole number for the calories", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             switch action.style{
             case .default:
@@ -231,12 +225,12 @@ class HomeViewController: UIViewController {
     @IBAction func NewDay(_ sender: UIButton) {
         totalCaloriesLabel.text = String(cals)
         history = CoreDataHelperHistory.retrieveMyHistory()
-        totalCalories = Double(Int(cals))
+        totalCalories = Int(Int(cals))
         foods.removeAll()
         calories.removeAll()
         history.date = Date() // assigns the current time and date
         print(caloriesInTotal)
-        history.calories = caloriesInTotal
+        history.calories = Int32(caloriesInTotal)
 
         caloriesInTotal = 0
         calorieAmount.text = "0"
@@ -250,7 +244,7 @@ class HomeViewController: UIViewController {
         // deleting the entry altogether if it has nil values
         // or just prevent peopl
  
-        warningcount = 0
+        warningcount = false
     }
     
 }
@@ -258,15 +252,17 @@ class HomeViewController: UIViewController {
 
 // FIXME: Refactor and move to util file
 extension String {
-    func toDouble() -> Double? {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.locale = Locale(identifier: "en_US_POSIX")
-        return numberFormatter.number(from: self)?.doubleValue
-    }
+
     func toInt() -> Int? {
         let numberFormatter = NumberFormatter()
         numberFormatter.locale = Locale(identifier: "en_US_POSIX")
         return numberFormatter.number(from: self)?.intValue
+        
+    }
+    func toDouble() -> Double? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale(identifier: "en_US_POSIX")
+        return numberFormatter.number(from: self)?.doubleValue
         
     }
     func isInt() -> Bool {
@@ -280,7 +276,18 @@ extension String {
         
         return false
     }
-    
+    func isDouble() -> Bool {
+        
+        if let doubleValue = Double(self) {
+            
+            if doubleValue >= 0 {
+                return true
+            }
+        }
+        
+        return false
+    }
+
     func isFloat() -> Bool {
         
         if let floatValue = Float(self) {
@@ -293,17 +300,6 @@ extension String {
         return false
     }
     
-    func isDouble() -> Bool {
-        
-        if let doubleValue = Double(self) {
-            
-            if doubleValue >= 0 {
-                return true
-            }
-        }
-        
-        return false
-    }
     
     func numberOfCharacters() -> Int {
         return self.characters.count
@@ -322,22 +318,36 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         cell.foodName.text = food
         cell.calories.text = String(calorie)
         return cell
+        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath){
         if editingStyle == .delete {
             
             totalCalories = totalCalories + calories[indexPath.row]
-            if totalCalories > 0{
+            if totalCalories >= 0{
             totalCaloriesLabel.text = String(totalCalories)
             }
             else{
                 totalCaloriesLabel.text = "0"
             }
+            if caloriesInTotal <= 0{
+                calorieAmount.text = "0"
+                caloriesInTotal = 0
+            }
+            if foods.count == 0 && calories.count == 0 {
+                caloriesInTotal = 0
+            }
             caloriesInTotal = caloriesInTotal - calories[indexPath.row]
             calorieAmount.text = String(caloriesInTotal)
             calories.remove(at: indexPath.row)
             foods.remove(at: indexPath.row)
+            defaults.set(foods, forKey: "FoodItemsArray")
+            defaults.set(calories, forKey: "CaloriesArray")
+            defaults.set(totalCaloriesLabel.text, forKey: "totalCaloriesLabel")
+            defaults.set(totalCalories, forKey: "totalCaloriesLabel")
+            defaults.set(caloriesInTotal, forKey: "InTotal")
+            tableView.reloadData()
             
             
         }
