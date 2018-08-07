@@ -208,7 +208,7 @@ class HomeViewController: UIViewController {
     }
     
     func incorrectCalories() {
-        let alert = UIAlertController(title: "Incorrect calorie amount", message: "Make sure you put an integer whole number for the calories", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Incorrect calorie amount", message: "Make sure you put a sensible positive integer for the calories", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             switch action.style{
             case .default:
