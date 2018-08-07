@@ -22,7 +22,7 @@ class ThirdHelperViewController: UIViewController {
     
     private func playVideo() {
         
-        guard let path = Bundle.main.path(forResource: "videoThree", ofType: "mov") else {
+        guard let path = Bundle.main.path(forResource: "VideoThree***", ofType: "mov") else {
             debugPrint("Video.mov not found")
             return
         }
