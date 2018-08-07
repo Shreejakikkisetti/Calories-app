@@ -1,17 +1,18 @@
 //
-//  helperViewController.swift
+//  ThirdHelperViewController.swift
 //  Calories app
 //
-//  Created by Shreeja Kikkisetti on 8/3/18.
+//  Created by Shreeja Kikkisetti on 8/6/18.
 //  Copyright © 2018 Shreeja Kikkisetti. All rights reserved.
 //
+
 
 import Foundation
 import UIKit
 import AVKit
 import AVFoundation
 
-class HelperViewController: UIViewController {
+class ThirdHelperViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -21,7 +22,7 @@ class HelperViewController: UIViewController {
     
     private func playVideo() {
         
-        guard let path = Bundle.main.path(forResource: "firstVideo", ofType: "mov") else {
+        guard let path = Bundle.main.path(forResource: "videoThree", ofType: "mov") else {
             debugPrint("Video.mov not found")
             return
         }

@@ -447,10 +447,10 @@
             </objects>
             <point key="canvasLocation" x="-4054" y="895"/>
         </scene>
-        <!--Helper View Controller-->
+        <!--Second Helper View Controller-->
         <scene sceneID="uyg-LF-5Aq">
             <objects>
-                <viewController storyboardIdentifier="Third" id="GiA-Nj-Lsq" customClass="HelperViewController" customModule="Calories_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Third" id="GiA-Nj-Lsq" customClass="SecondHelperViewController" customModule="Calories_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xWP-Av-jvi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -475,10 +475,10 @@
             </objects>
             <point key="canvasLocation" x="-3324" y="895"/>
         </scene>
-        <!--Helper View Controller-->
+        <!--Third Helper View Controller-->
         <scene sceneID="ko5-pK-dAL">
             <objects>
-                <viewController storyboardIdentifier="Fourth" id="0SR-fm-aRx" customClass="HelperViewController" customModule="Calories_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Fourth" id="0SR-fm-aRx" customClass="ThirdHelperViewController" customModule="Calories_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lMU-d8-CnJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

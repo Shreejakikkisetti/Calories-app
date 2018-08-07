@@ -1,8 +1,8 @@
 //
-//  helperViewController.swift
+//  SecondHelperViewController.swift
 //  Calories app
 //
-//  Created by Shreeja Kikkisetti on 8/3/18.
+//  Created by Shreeja Kikkisetti on 8/6/18.
 //  Copyright © 2018 Shreeja Kikkisetti. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class HelperViewController: UIViewController {
+class SecondHelperViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -21,7 +21,7 @@ class HelperViewController: UIViewController {
     
     private func playVideo() {
         
-        guard let path = Bundle.main.path(forResource: "firstVideo", ofType: "mov") else {
+        guard let path = Bundle.main.path(forResource: "videoTwo", ofType: "mov") else {
             debugPrint("Video.mov not found")
             return
         }
@@ -41,3 +41,4 @@ class HelperViewController: UIViewController {
         }
     }
 }
+
