@@ -14,6 +14,18 @@ import AVFoundation
 
 class ThirdHelperViewController: UIViewController {
     
+
+    @IBOutlet weak var continueButton: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        continueButton.layer.cornerRadius = 10
+        continueButton.clipsToBounds = true
+
+
+
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         playVideo()

@@ -30,6 +30,7 @@ class ProfileViewController: UIViewController {
     var saveCheck = false
     static var MyCaloriesAmount: Int = 0
     
+    @IBOutlet weak var questionMark: UIButton!
     var activityValue = 0.0
     var segmentedControlIndex: Int?
     var weightString = ""
@@ -37,11 +38,31 @@ class ProfileViewController: UIViewController {
     let white = UIColor(rgb: 0xF9F8F0)  // BE5300 is the hex value
     let darkPink = UIColor(rgb: 0x8884FF)
 
+    @IBOutlet weak var resetButton: UIButton!
     
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        little.layer.cornerRadius = 10
+        little.clipsToBounds = true
+        
+        light.layer.cornerRadius = 10
+        light.clipsToBounds = true
+        
+        moderate.layer.cornerRadius = 10
+        moderate.clipsToBounds = true
+
+        heavy.layer.cornerRadius = 10
+        heavy.clipsToBounds = true
+        
+        questionMark.layer.cornerRadius = 10
+        questionMark.clipsToBounds = true
+        
+        resetButton.layer.cornerRadius = 10
+        resetButton.clipsToBounds = true
+        
         self.hideKeyboardWhenTappedAround()
          // Do any additional setup after loading the view, typically from a nib.
  
@@ -227,7 +248,7 @@ class ProfileViewController: UIViewController {
                 
                 let hdbl = hDbl
                 let isHeightInteger = floor(hdbl) == hdbl
-                if wDbl > 8 && hDbl > 8 && aDbl > 0 && isWeightInteger && isAgeInteger && isHeightInteger && wDbl < 2000 && aDbl < 300 && hDbl < 300 {
+                if wDbl > 0 && hDbl > 0 && aDbl > 0 && isWeightInteger && isAgeInteger && isHeightInteger && wDbl < 5000 && aDbl < 1000 && hDbl < 1000 {
                 if (weightTextBox.text?.count)!>=1 && (ageTextBox.text?.count)!>=1  && (heightTextBox.text?.count)!>=1 {
                     saveButtonAlert()
                     weight = Int(wDbl)

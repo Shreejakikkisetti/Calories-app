@@ -19,12 +19,17 @@ class HomeViewController: UIViewController {
     var historyArray = [History]()
     var warningcount = false
     
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var calorieAmount: UILabel!
     @IBOutlet weak var totalCaloriesLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var foodItemTextField: UITextField!
     @IBOutlet weak var caloriesTextField: UITextField!
     @IBOutlet weak var NewDay: UIButton!
+    
+    @IBOutlet weak var caloriesLeftView: UIView!
+    
+    @IBOutlet weak var totalCaloriesView: UIView!
     
     func getButton() -> UIButton {
         return NewDay
@@ -74,6 +79,16 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        addButton.layer.cornerRadius = 10
+        addButton.clipsToBounds = true
+        
+        caloriesLeftView.layer.cornerRadius = 5;
+        caloriesLeftView.layer.masksToBounds = true;
+        
+        totalCaloriesView.layer.cornerRadius = 5;
+        caloriesLeftView.layer.masksToBounds = true;
+        
         self.hideKeyboardWhenTappedAround()
         tableView.delegate = self
         tableView.dataSource = self
@@ -135,7 +150,7 @@ class HomeViewController: UIViewController {
                 if let numDbl = num.toDouble(){
                     let dbl = numDbl
                     let isInteger = floor(dbl) == dbl
-                    if numDbl >= 0 && numDbl < 10000 && isInteger {
+                    if numDbl >= 0 && numDbl < 900000 && isInteger {
                     numInt = Int(numDbl)
 
                     //update the total calories and update the total calories label

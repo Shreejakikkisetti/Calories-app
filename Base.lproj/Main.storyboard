@@ -21,9 +21,9 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yKi-ZZ-JiE">
                                 <rect key="frame" x="25" y="350" width="325" height="199"/>
-                                <color key="backgroundColor" red="0.97647058823529409" green="0.97254901960784312" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="separatorColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="sectionIndexBackgroundColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="foodTableViewCell" id="ap7-yA-eu5" customClass="FoodTableViewCell" customModule="Calories_app" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="325" height="44"/>
@@ -34,8 +34,8 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Food Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hpu-Jt-doG">
                                                     <rect key="frame" x="42" y="12" width="160" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="19"/>
+                                                    <color key="textColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Calories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PTQ-eF-GcP">
@@ -43,12 +43,12 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="89" id="QvW-dc-Gm6"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="19"/>
+                                                    <color key="textColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.97647058823529409" green="0.97254901960784312" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="Hpu-Jt-doG" firstAttribute="leading" secondItem="VFU-Qu-8LE" secondAttribute="leadingMargin" constant="27" id="7Th-1u-aa9"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="PTQ-eF-GcP" secondAttribute="trailing" constant="-1" id="A0f-Fq-Fbd"/>
@@ -57,7 +57,7 @@
                                                 <constraint firstItem="Hpu-Jt-doG" firstAttribute="centerY" secondItem="VFU-Qu-8LE" secondAttribute="centerY" id="u30-Zc-GGh"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.73817580120000004" green="1" blue="0.94750876279999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="calories" destination="PTQ-eF-GcP" id="Xi8-gf-44F"/>
                                             <outlet property="foodName" destination="Hpu-Jt-doG" id="m91-Xv-KNj"/>
@@ -107,7 +107,7 @@
                                                     <constraint firstAttribute="height" constant="20" id="WNY-fh-5JU"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CALS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhX-VY-QHp">
@@ -118,11 +118,11 @@
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="x9Y-Vx-hBu"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.97647058823529409" green="0.97254901960784312" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="FhX-VY-QHp" secondAttribute="trailing" id="1qe-gV-azH"/>
                                             <constraint firstItem="FhX-VY-QHp" firstAttribute="leading" secondItem="IlL-KC-2QV" secondAttribute="leading" id="4Zh-Kd-cJN"/>
@@ -145,7 +145,7 @@
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="20" id="NIn-L5-kzV"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oOP-BN-6nJ">
@@ -156,11 +156,11 @@
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="117.5" id="o6c-4e-3or"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.97647058823529409" green="0.9721182541303558" blue="0.9419246720679012" alpha="0.98642398389570551" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="oOP-BN-6nJ" firstAttribute="centerX" secondItem="uvB-w4-HWI" secondAttribute="centerX" id="AQp-mJ-9J7"/>
                                             <constraint firstItem="oOP-BN-6nJ" firstAttribute="centerX" secondItem="Gd2-E4-kat" secondAttribute="centerX" id="C1v-X9-5dt"/>
@@ -184,10 +184,11 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KzF-HT-H2D">
-                                <rect key="frame" x="320" y="300" width="30" height="30"/>
+                                <rect key="frame" x="320" y="295" width="30" height="35"/>
+                                <color key="backgroundColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                 <state key="normal" title="+">
-                                    <color key="titleColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="0.98642398389999997" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="addButton:" destination="BAJ-dM-cdx" eventType="touchUpInside" id="EHk-lA-Bd4"/>
@@ -200,7 +201,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="325" height="32"/>
                                         <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="17"/>
                                         <state key="normal" title="New Day">
-                                            <color key="titleColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="0.98642398389999997" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="NewDay:" destination="BAJ-dM-cdx" eventType="touchUpInside" id="BKt-Zg-pAf"/>
@@ -214,13 +215,13 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="kev-He-v22"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="25"/>
-                                        <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.84313725490000002" green="0.73725490199999999" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="yKi-ZZ-JiE" firstAttribute="leading" secondItem="wNa-Uu-EnH" secondAttribute="leading" constant="25" id="0qr-6t-CL2"/>
                             <constraint firstItem="thY-gX-JZR" firstAttribute="top" secondItem="XWc-lm-2vU" secondAttribute="bottom" constant="25" id="4GV-dN-JNT"/>
@@ -233,6 +234,7 @@
                             <constraint firstItem="yKi-ZZ-JiE" firstAttribute="top" secondItem="thY-gX-JZR" secondAttribute="bottom" constant="20" id="LBO-6g-39t"/>
                             <constraint firstItem="wNa-Uu-EnH" firstAttribute="bottom" secondItem="yKi-ZZ-JiE" secondAttribute="bottom" constant="25" id="NeJ-uG-C0C"/>
                             <constraint firstItem="XWc-lm-2vU" firstAttribute="leading" secondItem="wNa-Uu-EnH" secondAttribute="leading" constant="25" id="Nhy-cl-LYq"/>
+                            <constraint firstItem="KzF-HT-H2D" firstAttribute="top" secondItem="XWc-lm-2vU" secondAttribute="bottom" constant="20" id="NsA-nE-RXh"/>
                             <constraint firstItem="XWc-lm-2vU" firstAttribute="leading" secondItem="wNa-Uu-EnH" secondAttribute="leading" constant="25" id="Ozy-9f-rsC"/>
                             <constraint firstItem="thY-gX-JZR" firstAttribute="top" secondItem="XWc-lm-2vU" secondAttribute="bottom" constant="25" id="XUD-y7-3e8"/>
                             <constraint firstItem="wNa-Uu-EnH" firstAttribute="trailing" secondItem="XWc-lm-2vU" secondAttribute="trailing" constant="25" id="djC-to-EIl"/>
@@ -240,7 +242,6 @@
                             <constraint firstItem="wNa-Uu-EnH" firstAttribute="trailing" secondItem="XWc-lm-2vU" secondAttribute="trailing" constant="25" id="ikH-OL-7mQ"/>
                             <constraint firstItem="wNa-Uu-EnH" firstAttribute="trailing" secondItem="1tB-Xp-CuC" secondAttribute="trailing" constant="25" id="nce-SA-W4r"/>
                             <constraint firstItem="wNa-Uu-EnH" firstAttribute="trailing" secondItem="yKi-ZZ-JiE" secondAttribute="trailing" constant="25" id="vCC-2v-dFH"/>
-                            <constraint firstItem="KzF-HT-H2D" firstAttribute="top" secondItem="thY-gX-JZR" secondAttribute="top" id="wTm-m5-aan"/>
                             <constraint firstItem="1tB-Xp-CuC" firstAttribute="top" secondItem="wNa-Uu-EnH" secondAttribute="top" constant="30" id="wji-Vl-EmS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wNa-Uu-EnH"/>
@@ -252,11 +253,14 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="NewDay" destination="O53-X7-cnh" id="8cJ-2a-Jgf"/>
+                        <outlet property="addButton" destination="KzF-HT-H2D" id="0y4-k5-Al8"/>
                         <outlet property="calorieAmount" destination="oOP-BN-6nJ" id="XJb-fy-hgf"/>
+                        <outlet property="caloriesLeftView" destination="IlL-KC-2QV" id="7Rr-2I-NvM"/>
                         <outlet property="caloriesTextField" destination="d2e-lD-0u9" id="rek-bu-vgI"/>
                         <outlet property="foodItemTextField" destination="0Mb-Fm-qIP" id="Feo-8L-bGK"/>
                         <outlet property="tableView" destination="yKi-ZZ-JiE" id="f3a-Sh-NLy"/>
                         <outlet property="totalCaloriesLabel" destination="FhX-VY-QHp" id="U9Q-uz-w09"/>
+                        <outlet property="totalCaloriesView" destination="Gd2-E4-kat" id="t7p-q7-3Mw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fho-9E-S5j" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -281,7 +285,7 @@
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="28F-8z-llP">
                                 <rect key="frame" x="25" y="117" width="325" height="476"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -455,14 +459,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the food and calories that you have aten for the day in the home screen." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Caw-fd-E9y">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the food and calories that you ate for the day in the home screen." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Caw-fd-E9y">
                                 <rect key="frame" x="25" y="45" width="325" height="87.5"/>
                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="25"/>
-                                <color key="textColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.84313725490000002" green="0.73725490199999999" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Caw-fd-E9y" secondAttribute="trailing" constant="25" id="CXM-8t-B3Y"/>
                             <constraint firstItem="Caw-fd-E9y" firstAttribute="top" secondItem="GMe-qN-cgM" secondAttribute="top" constant="25" id="DI0-yk-2QZ"/>
@@ -497,8 +501,8 @@
                                     <segue destination="rQe-pg-SHN" kind="show" id="TI2-dF-x6g"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View your past calorie intake on the history tab" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHV-9L-ToR">
-                                <rect key="frame" x="25" y="45" width="325" height="58.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View your past calorie intake, after clicking new day, on the history tab." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHV-9L-ToR">
+                                <rect key="frame" x="25" y="45" width="325" height="87.5"/>
                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="25"/>
                                 <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -515,6 +519,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cfn-E4-o9l"/>
                     </view>
+                    <connections>
+                        <outlet property="continueButton" destination="Zk4-3q-uWn" id="Czj-4W-zaR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gye-aD-4s5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -545,6 +552,7 @@
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ys8-TN-wDu">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
+                                                                        <color key="backgroundColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="30" id="55e-WP-c6D"/>
                                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="50" id="PSD-nv-yo4"/>
@@ -552,7 +560,7 @@
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="18"/>
                                                                         <state key="normal" title="Reset">
-                                                                            <color key="titleColor" red="0.53333333333333333" green="0.51764705882352935" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <color key="titleColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </state>
                                                                         <connections>
                                                                             <action selector="resetButtonPressed:" destination="vAf-bx-Dly" eventType="touchUpInside" id="BNk-Op-uHG"/>
@@ -569,13 +577,14 @@
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SeH-Z3-pqt">
                                                                         <rect key="frame" x="300" y="0.0" width="25" height="30"/>
+                                                                        <color key="backgroundColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="DtV-L1-h8g"/>
                                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="LBr-vh-VsJ"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="19"/>
                                                                         <state key="normal" title="?">
-                                                                            <color key="titleColor" red="0.53333333329999999" green="0.51764705879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <color key="titleColor" red="0.97647058819999999" green="0.97254901959999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </state>
                                                                         <connections>
                                                                             <action selector="helpButtonPressed:" destination="vAf-bx-Dly" eventType="touchUpInside" id="3kc-TC-wSo"/>
@@ -811,6 +820,8 @@
                         <outlet property="little" destination="IXW-X4-MOM" id="nZH-tw-viq"/>
                         <outlet property="moderate" destination="wsE-aN-HLY" id="1xP-pP-Qhv"/>
                         <outlet property="profileView" destination="Z9F-16-3gL" id="DSC-O9-YoE"/>
+                        <outlet property="questionMark" destination="SeH-Z3-pqt" id="FGC-lt-4e6"/>
+                        <outlet property="resetButton" destination="ys8-TN-wDu" id="Jbg-df-ZCt"/>
                         <outlet property="weightTextBox" destination="iBX-he-Y7c" id="rfE-hQ-sF1"/>
                         <outletCollection property="activityButtons" destination="U1S-2S-ngY" collectionClass="NSMutableArray" id="qVw-Z3-5dj"/>
                         <outletCollection property="activityButtons" destination="IXW-X4-MOM" collectionClass="NSMutableArray" id="MC6-IQ-KwM"/>

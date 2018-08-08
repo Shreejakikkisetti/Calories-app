@@ -21,7 +21,7 @@ class SecondHelperViewController: UIViewController {
     
     private func playVideo() {
         
-        guard let path = Bundle.main.path(forResource: "videoTwo", ofType: "mov") else {
+        guard let path = Bundle.main.path(forResource: "videoTwo***", ofType: "mov") else {
             debugPrint("Video.mov not found")
             return
         }
