@@ -80,6 +80,9 @@ class HomeViewController: UIViewController {
         
         super.viewDidLoad()
         
+        tableView.layer.cornerRadius = 10
+        tableView.clipsToBounds = true
+        
         addButton.layer.cornerRadius = 10
         addButton.clipsToBounds = true
         
